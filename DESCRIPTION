@@ -1,0 +1,24 @@
+Package: meTool
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.1
+Authors@R: 
+    person("Yifan", "Yue", , "yifanyue@outlook.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0004-1339-6144"))
+Description: What the package does (one paragraph).
+License: `use_mit_license()`
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Imports: 
+    aplot,
+    cowplot,
+    dplyr,
+    ggplot2,
+    ggplotify,
+    ggraph,
+    igraph,
+    patchwork,
+    psych,
+    tidygraph
+Depends: 
+    tidyverse
