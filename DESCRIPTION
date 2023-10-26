@@ -14,6 +14,7 @@ Imports:
     cowplot,
     devtools,
     dplyr,
+    ggDoubleHeat,
     ggplot2,
     ggplotify,
     ggraph,
