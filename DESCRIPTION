@@ -12,13 +12,16 @@ RoxygenNote: 7.2.3
 Imports: 
     aplot,
     cowplot,
+    devtools,
     dplyr,
     ggplot2,
     ggplotify,
     ggraph,
     igraph,
+    linkET,
     patchwork,
     psych,
+    rstatix,
     tidygraph
 Depends: 
     tidyverse
