@@ -2,6 +2,8 @@
 
 To download meTool package
 
+options(download.file.method = "wininet") #Not necessary; only if the package cannot be download successfully.
+
 devtools::install_github("YiFanYUE99/meTool")
 
 Schematic Of meTool
