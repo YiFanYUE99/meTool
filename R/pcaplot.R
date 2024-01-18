@@ -41,6 +41,7 @@ pcaplot<-function(input, color = c("pink2","violet","lightblue2","lightgreen")){
   #pc1的密度图
   p1<- ggplot(df1, aes(df1$PC1, fill = df1$data...dim.data..2..)) +
     geom_density(alpha = 0.15,show.legend = FALSE) +
+    scale_fill_manual(values = color) + scale_colour_manual(values = color) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
     labs(x=NULL,y=NULL)+#去掉横纵坐标名称
     theme(axis.text.x = element_blank(),
@@ -51,6 +52,7 @@ pcaplot<-function(input, color = c("pink2","violet","lightblue2","lightgreen")){
   #pc2的密度图
   p2<- ggplot(df1, aes(df1$PC2, fill = df1$data...dim.data..2..)) +
     geom_density(alpha = 0.15, show.legend = FALSE) +
+    scale_fill_manual(values = color) + scale_colour_manual(values = color) +
     scale_y_continuous(expand = expansion(mult = c(0, 0.05))) +
     labs(x=NULL,y=NULL)+#去掉横纵坐标名称
     theme(axis.text.x = element_blank(),
