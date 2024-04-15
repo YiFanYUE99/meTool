@@ -4,25 +4,12 @@
 \alias{cornet}
 \title{Title a function to make correlation network between genes and metabolites}
 \usage{
-cornet(
-  gene,
-  metabolites,
-  geneedge,
-  metabedge,
-  genenode,
-  metabnode,
-  poscol,
-  negcol
-)
+cornet(gene, metabolites, genenode, metabnode, poscol, negcol)
 }
 \arguments{
 \item{gene}{a csv file containing gene abundance without group// example in data/gene.csv}
 
 \item{metabolites}{a csv file containing peak concentration and group//example in data/metabolitesg.csv}
-
-\item{geneedge}{gene edge color}
-
-\item{metabedge}{metabolites edge color}
 
 \item{genenode}{the color of genes nodes}
 
@@ -39,7 +26,7 @@ the correlationnetwork
 Title a function to make correlation network between genes and metabolites
 }
 \examples{
-     setwd("D:/R_work/meTool")
-     a<-cornet("data/gene.csv","data/metabolitesg.csv",geneedge="green",metabedge="pink",genenode="blue",metabnode="yellow",poscol="pink",negcol="green")
+     #setwd("D:/R_work/meTool")
+     #a<-cornet("data/gene.csv","data/metabolites.csv",geneedge="green",metabedge="pink",genenode="blue",metabnode="yellow",poscol="pink",negcol="green")
 
 }

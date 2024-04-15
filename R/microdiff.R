@@ -7,7 +7,8 @@
 #' @return Differential bacteria
 #' @export
 #'
-#' @examples #a<-microdiff("data/microbiome.csv")
+#' @examples
+#' #a<-microdiff("data/microbiome.csv")
 #'
 microdiff<-function(dataname){
   mi<-read.csv(dataname,check.names = FALSE,row.names = 1)

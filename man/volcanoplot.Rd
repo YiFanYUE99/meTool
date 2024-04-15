@@ -4,15 +4,7 @@
 \alias{volcanoplot}
 \title{Title draw volcano plot}
 \usage{
-volcanoplot(
-  input,
-  CK = 1:6,
-  TR = 13:18,
-  legendp = c(0.73, 0.8),
-  xlab = c(-2.5, 2.5),
-  ylab = c(0, 4.6),
-  textsize = 0.8
-)
+volcanoplot(input, titlename = "volcano plot", G = c("CK", "L"))
 }
 \arguments{
 \item{input}{the metabolites file//example:data/metabolitesg.csv}
@@ -26,8 +18,6 @@ volcanoplot(
 \item{xlab}{the range of abscissa}
 
 \item{ylab}{the range of ordinate}
-
-\item{textsize}{the text size of the point}
 }
 \value{
 the volcano plot
@@ -36,9 +26,10 @@ the volcano plot
 Title draw volcano plot
 }
 \examples{
-   setwd("D:/R_work/meTool")
-   a<-volcanoplot("data/metabolitesg.csv",CK=1:6, TR=13:18,legendp=c(0.8,0.1), xlab=c(-2,2),ylab=c(0,5),textsize=0.8)
-   a
+   #setwd("D:/R_work/meTool")
+   #G=c("CK","H")
+   #a<-volcanoplot("data/metabolitesg.csv",G=G)
+   #a
 
 
 }

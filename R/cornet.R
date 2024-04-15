@@ -2,8 +2,6 @@
 #'
 #' @param gene a csv file containing gene abundance without group// example in data/gene.csv
 #' @param metabolites a csv file containing peak concentration and group//example in data/metabolitesg.csv
-#' @param geneedge gene edge color
-#' @param metabedge metabolites edge color
 #' @param genenode the color of genes nodes
 #' @param metabnode the color of metabolites nodes
 #' @param poscol if correlation no.>0, the color of the edge
@@ -16,11 +14,11 @@
 #' @export
 #'
 #' @examples
-#'      setwd("D:/R_work/meTool")
-#'      a<-cornet("data/gene.csv","data/metabolitesg.csv",geneedge="green",metabedge="pink",genenode="blue",metabnode="yellow",poscol="pink",negcol="green")
+#'      #setwd("D:/R_work/meTool")
+#'      #a<-cornet("data/gene.csv","data/metabolites.csv",geneedge="green",metabedge="pink",genenode="blue",metabnode="yellow",poscol="pink",negcol="green")
 #'
 
-cornet<-function(gene, metabolites,geneedge,metabedge,genenode,metabnode,poscol,negcol){
+cornet<-function(gene, metabolites,genenode,metabnode,poscol,negcol){
   genes<-read.table(gene, header = TRUE,row.names = 1,check.names = FALSE,sep = ",")
   metabolites<-read.table(metabolites,header = TRUE,row.names = 1,sep = ",",check.names = FALSE)
   all<-cbind(genes,metabolites)
@@ -45,7 +43,7 @@ cornet<-function(gene, metabolites,geneedge,metabedge,genenode,metabnode,poscol,
   colnames(nodes)<-c("node","type","abundance","color")
   nodes<-as.data.frame(nodes)
   nodes[,3]<-as.numeric(nodes[,3])#更改第三列数据结构从chr变numeric
-  nodes[,4]<-c(rep(geneedge,dim(genes)[2]),rep(metabedge,dim(metabolites)[2]-1))
+  nodes[,4]<-c(rep("geneedge",dim(genes)[2]),rep("metabedge",dim(metabolites)[2]-1))
 
   #make edges table
   edges<-matrix(nrow = dim(a)[1]*dim(a)[2],ncol = 4)
@@ -87,10 +85,9 @@ cornet<-function(gene, metabolites,geneedge,metabedge,genenode,metabnode,poscol,
     ggraph(layout = 'circle')+#see ??layout; stress circle are good ones
     #parameter of edges
     geom_edge_link(aes(edge_width = abs(edges$coeffi),
-                       color=relation
-                       #,edge_linetype = edges$relation#使用relation作为线型
-    ),
-    edge_alpha= 0.9)+#the edge color depends on edge relation
+                       color=relation,
+                       edge_alpha= ifelse(abs(edges$coeffi)>0.9,0.9,0.4)),
+                   linetype = "solid")+#the edge color depends on edge relation
     scale_edge_width(breaks = seq(0.2,1,0.2),
                      label=seq(0.2,1,0.2),
                      range=c(0.2,2),
@@ -98,54 +95,66 @@ cornet<-function(gene, metabolites,geneedge,metabedge,genenode,metabnode,poscol,
                                           title.theme = element_text(
                                             size=10,
                                             face="italic",
+                                            family = "mono",
                                             colour = "gray1"),
                                           label.theme = element_text(
                                             size = 10,
                                             color = "grey1",
-                                            face = "italic"),
-                     ))+
+                                            family = "mono",
+                                            face = "italic")))+
+    scale_edge_alpha(guide= "none")+
     scale_edge_color_manual(values = c('positive' = poscol, 'negative' = negcol),
                             guide = guide_legend(title = "Correlation",
                                                  title.theme = element_text(
                                                    size = 10,
                                                    face = "italic",
+                                                   family = "mono",
                                                    color = "grey1"),
                                                  label.theme = element_text(
                                                    size = 10,
                                                    color = "grey1",
+                                                   family = "mono",
                                                    face ="italic")
                             ))+
     #设置点的参数
-    geom_node_point(aes(color = as.factor(type) , size = abundance),alpha=1)+#aes(color=,size=);points color by ; points size on ;need to be continuous data
+    geom_node_point(aes(color = as.factor(type) , size = abundance),
+                    alpha=1)+#aes(color=,size=);points color by ; points size on ;need to be continuous data
     scale_color_manual(values = c('genes'=genenode, 'metabolites'=metabnode),
                        guide = guide_legend(title = "type",
                                             title.theme = element_text(
                                               size = 10,
                                               face="italic",
+                                              family = "mono",
                                               colour = "grey1"),
                                             label.theme = element_text(
                                               size = 10,
                                               colour = "grey1",
+                                              family = "mono",
                                               face="italic")))+
     scale_size(
       range = c(2,10),
-      guide=guide_legend(title = "Abundance",
+      guide=guide_legend(title = "Relative Abundance",
                          title.theme = element_text(
                            size = 10,
                            face="italic",
+                           family = "mono",
                            color = "gray1"),
                          label.theme = element_text(
-                           size = 10,colour = "grey1",face = "italic")))+
+                           size = 10,family = "mono",colour = "grey1",face = "italic")))+
     geom_node_text(aes(x=x,y=y,
                        #label= ifelse(nodes$type=="genes",as.character(nodes$node),"")
-                       label=nodes$node
+                       label=nodes$node,
+                       family = "serif"
     ),
-    size=3,
+    size=5,
     color= "grey2",
     show.legend= F)+
     theme(
+      text = element_text(family = "mono", size = 12),
       legend.title.align = 0,#legend左对齐
+      legend.title = element_text(family = "mono", size = 8),
       legend.text.align =0,#legend text左对齐
+      legend.text = element_text(family = "mono", size = 8),
       legend.spacing.x = unit(0.1,"cm"),#图例各个元素距离
       legend.spacing.y = unit(0.1,"cm"),
       panel.background = element_blank(),#delete background.

@@ -4,7 +4,7 @@
 \alias{pcaplot}
 \title{Title draw 2D pca plot}
 \usage{
-pcaplot(input, color = c("pink2", "violet", "lightblue2", "lightgreen"))
+pcaplot(input, color = c(CK = "violet", L = "lightblue2", H = "lightgreen"))
 }
 \arguments{
 \item{input}{csv file//example: data/metabolitesg.csv}
@@ -19,5 +19,5 @@ Title draw 2D pca plot
 }
 \examples{
      setwd("D:/R_work/meTool")
-     a<-pcaplot("data/metabolitesg.csv",color= c("pink2","violet","lightblue2","lightgreen"))
+     a<-pcaplot("data/metabolitesg.csv",color= c("CK"="violet","L"="lightblue2","H"="lightgreen"))
 }
