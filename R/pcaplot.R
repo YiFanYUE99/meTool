@@ -12,8 +12,8 @@
 #' @import ggplotify
 #'
 #' @examples
-#'      setwd("D:/R_work/meTool")
-#'      a<-pcaplot("data/metabolitesg.csv",color= c("CK"="violet","L"="lightblue2","H"="lightgreen"))
+#'      #setwd("D:/R_work/meTool")
+#'      #a<-pcaplot("data/metabolitesg.csv",color= c("CK"="violet","L"="lightblue2","H"="lightgreen"))
 pcaplot<-function(input, color = c("CK"="violet","L"="lightblue2","H"="lightgreen")){
   data<- read.table(input,header=T,row.names=1,check.names = F,sep=",")
   #scale. = TRUE表示分析前对数据进行归一化；#行为样本，列为特征

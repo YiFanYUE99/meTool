@@ -1,5 +1,4 @@
-#' Title Find differential metabolites through t test
-#'
+#' Title Find differential metabolites through t test, but export them all
 #' @param input Input file name and its file place
 #' @param comgr The two groups you want to compare
 #'
@@ -11,8 +10,8 @@
 #' @examples
 #' #input<- "data/metabolitesg.csv"
 #' #comgr=c("CK","H")
-#' #tables<-metadiff(input,comgr)
-metadiff<-function(input,comgr=c("CK","H")){
+#' #tables<-metadiff_all(input,comgr)
+metadiff_all<-function(input,comgr=c("CK","H")){
   vip<-calc_vip(input,comgr)
   metabolites <- read.table(input, header = T, row.names = 1,
                             check.names = FALSE, sep = ",")
@@ -27,7 +26,6 @@ metadiff<-function(input,comgr=c("CK","H")){
   }
   sel<-cbind(sel,vip)
   colnames(sel)<-c("Metabolites","p-value","vip")
-  sel<-sel[sel$`p-value`<0.05&sel$vip>1,]
   sel<-sel[order(-sel$vip),]#降序排列
   return(sel)
 }

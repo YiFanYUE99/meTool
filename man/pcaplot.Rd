@@ -18,6 +18,6 @@ the PCA plot
 Title draw 2D pca plot
 }
 \examples{
-     setwd("D:/R_work/meTool")
-     a<-pcaplot("data/metabolitesg.csv",color= c("CK"="violet","L"="lightblue2","H"="lightgreen"))
+     #setwd("D:/R_work/meTool")
+     #a<-pcaplot("data/metabolitesg.csv",color= c("CK"="violet","L"="lightblue2","H"="lightgreen"))
 }
