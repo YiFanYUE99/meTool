@@ -23,6 +23,7 @@ Imports:
     igraph,
     linkET,
     patchwork,
+    pheatmap,
     pls,
     psych,
     rstatix,

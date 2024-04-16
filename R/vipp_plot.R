@@ -16,21 +16,21 @@ vipp_plot<-function(table,G=c("CK","H"),color=c("#86FF86","#E0FFE0")){
   title<-paste0(G[1]," ",G[2]," ","VIP & p value")
   bg<-c("#E6C8FF","#F0E0FF")
   gm<-c("#FFE0E0","#FFE0E6")
-  pointsize<-0.1
-  textsize<-2
-  linesize<-3.5
-  titlesize<-15
-  xtisize<-14
-  ytisize<-14
-  xtesize<-10
-  ytesize<-10
+  pointsize<-4
+  textsize<-1.5
+  linesize<-1
+  titlesize<-8
+  xtisize<-7
+  ytisize<-7
+  xtesize<-5
+  ytesize<-8
   ggplot(table, aes(x = Metabolites, y = vip)) +
     geom_segment(aes(x= Metabolites, y= vip, color=vip,
                      xend=Metabolites, yend=1),
                  linewidth=linesize,
                  linetype=1)+#使用reorder()排序变量
-    geom_point(aes(fill=log10(`p-value`), size=-log10(`p-value`)/pointsize), pch = 21, color=bg[1]) +
-    geom_text(aes(label =sprintf("%.4f",`p-value`)),
+    geom_point(aes(fill=log10(`p-value`), size=-log10(`p-value`)+pointsize), pch = 21, color=bg[1]) +
+    geom_text(aes(label =sprintf("%.3f",`p-value`)),
               color = "black",
               size = textsize,
               family = "mono",
@@ -49,8 +49,8 @@ vipp_plot<-function(table,G=c("CK","H"),color=c("#86FF86","#E0FFE0")){
       axis.title.y = element_text(size = ytisize),
       axis.text.x = element_text(face = "bold", angle = 0, hjust = 1,size = xtesize),#横坐标
       axis.text.y = element_text(face = "bold", angle = 25, hjust = 1,size = ytesize),
-      legend.text = element_text(size = 8),#legend字体大小
-      legend.title = element_text(size = 8), #设置legend标签字体大小
+      #legend.text = element_text(size = 8),#legend字体大小
+      #legend.title = element_text(size = 8), #设置legend标签字体大小
       panel.grid.major = element_line(color = gm[1]),  # 主要网格线颜色为红色
       panel.grid.minor = element_line(color = gm[2]),  # 次要网格线颜色为蓝色
       panel.background = element_rect(fill = bg[2]),  # 去除背景

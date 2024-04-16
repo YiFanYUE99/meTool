@@ -27,7 +27,7 @@ plsdaplot<-function(input, G=c("CK","L"),color = c("CK"="violet","L"="lightblue2
   data1<-data[data$Group==G[1]|data$Group==G[2],2:dim(data)[2]-1]
   group<-as.factor(data[data$Group==G[1]|data$Group==G[2],dim(data)[2]])
   data1<-scale(data1,center = T,scale = T)#中心化且归一化数据
-  a<-plsda(x = data1, group, ncomp =11)
+  a<-plsda(x = data1, group, ncomp =2)
 
   ascore<-matrix(nrow= dim(a$scores)[1],ncol =2)
   for (i in 1:dim(ascore)[1]){
@@ -40,8 +40,8 @@ plsdaplot<-function(input, G=c("CK","L"),color = c("CK"="violet","L"="lightblue2
   ascore<-as.data.frame(ascore)
   ascore<-cbind(ascore,group)
 
-  xlab<-paste0("Component1(",round(a$Xvar[1]/10,2),"%)")#round保留小数点后两位
-  ylab<-paste0("Component2(",round(a$Xvar[2]/10,2),"%)")
+  xlab<-paste0("Component1(",round(a$Xvar[1]/a$Xtotvar*100,2),"%)")#round保留小数点后两位
+  ylab<-paste0("Component2(",round(a$Xvar[2]/a$Xtotvar*100,2),"%)")
   p3<-ggplot(data = ascore,aes(x=Comp1,y=Comp2,color = group))+
     stat_ellipse(aes(fill = group),#添加置信区间;以Group为标准
                  type = "t",level = 0.95, na.rm = FALSE, geom ="polygon",alpha=0.25,color=NA, show.legend=F,inherit.aes = T)+
