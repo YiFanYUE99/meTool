@@ -1,17 +1,17 @@
-#' Title Find differential bacteria
+#' Title Find differential bacteria; but not remove those insignificant microbiome
 #'
 #'
 #' @param dataname  The file name of microbiome abundance
 #' @param comgr the compared groups
 #' @import tidyverse
 #' @import rstatix
-#' @return Differential bacteria
+#' @return bacteria with t-test p values of two groups
 #' @export
 #'
 #' @examples
-#' #a<-microdiff("data/microbiome.csv",comgr=c("CK","L"))
+#' #b<-microdiff_all("data/microbiome.csv",comgr=c("CK","L"))
 #'
-microdiff<-function(dataname,comgr=c("CK","L")){
+microdiff_all<-function(dataname,comgr=c("CK","L")){
   mi<-read.csv(dataname,check.names = FALSE,row.names = 1)
   #简化菌群名称
   micro<-mi[,1:(dim(mi)[2]-1)]
@@ -40,14 +40,6 @@ microdiff<-function(dataname,comgr=c("CK","L")){
   #删除含nan的行
   sel<-sel[complete.cases(sel),]
   colnames(sel)<-c("Microbiome","p-value")
-  sel<-sel[sel$`p-value`<0.05,]
   sel<-sel[order(sel$`p-value`),]#升序排列
   return(sel)
 }
-
-
-
-
-
-
-

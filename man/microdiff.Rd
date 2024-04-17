@@ -4,10 +4,12 @@
 \alias{microdiff}
 \title{Title Find differential bacteria}
 \usage{
-microdiff(dataname)
+microdiff(dataname, comgr = c("CK", "L"))
 }
 \arguments{
 \item{dataname}{The file name of microbiome abundance}
+
+\item{comgr}{the compared groups}
 }
 \value{
 Differential bacteria
@@ -16,6 +18,6 @@ Differential bacteria
 Title Find differential bacteria
 }
 \examples{
-#a<-microdiff("data/microbiome.csv")
+#a<-microdiff("data/microbiome.csv",comgr=c("CK","L"))
 
 }
