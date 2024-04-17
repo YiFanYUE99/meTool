@@ -12,7 +12,7 @@
 #'
 microdiff<-function(dataname){
   mi<-read.csv(dataname,check.names = FALSE,row.names = 1)
-  mic<-as.tibble(mi)%>%
+  mic<-as_tibble(mi)%>%
     pivot_longer(cols = 1 : (dim(mi)[2]-1), names_to = "variable", values_to = "Abundance") %>%#改格式
     group_by(variable) %>%
     kruskal_test(Abundance~Group) %>%#批量计算kw检验p值

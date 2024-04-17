@@ -2,6 +2,8 @@
 
 export(abundhm)
 export(calc_vip)
+export(cor_met)
+export(cor_metmicro)
 export(cornet)
 export(getSig)
 export(mantelheatmap)
