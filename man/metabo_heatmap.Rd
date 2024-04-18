@@ -4,14 +4,12 @@
 \alias{metabo_heatmap}
 \title{Title draw differential metabolites}
 \usage{
-metabo_heatmap(input, comgr, table)
+metabo_heatmap(input, comgr)
 }
 \arguments{
 \item{input}{csv file//example: data/metabolitesg.csv}
 
 \item{comgr}{compared group names(just 2)}
-
-\item{table}{table from function metadiff}
 }
 \value{
 the metabolites abundance heatmap
@@ -22,7 +20,6 @@ Title draw differential metabolites
 \examples{
 #input<- "data/metabolitesg.csv"
 #comgr=c("CK","L")
-#table<-metadiff(input,comgr2)#筛选
-#p<-metabo_heatmap(input,comgr,table)
+#p<-metabo_heatmap(input,comgr)
 #ggsave(plot = p,"pic/metabolites_CK_L.png",width = 20,height = 15,dpi = 300,units = "cm")
 }

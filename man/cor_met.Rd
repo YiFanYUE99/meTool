@@ -2,7 +2,7 @@
 % Please edit documentation in R/cor_met.R
 \name{cor_met}
 \alias{cor_met}
-\title{Title Get the correlation picture}
+\title{Title Get the correlation picture of metabolites}
 \usage{
 cor_met(input = "data/metabolitesg.csv")
 }
@@ -13,7 +13,7 @@ cor_met(input = "data/metabolitesg.csv")
 a picture of the metabolites correlation map
 }
 \description{
-Title Get the correlation picture
+Title Get the correlation picture of metabolites
 }
 \examples{
 #plot<-cor_met("data/metabolitesg.csv")

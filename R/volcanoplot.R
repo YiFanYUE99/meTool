@@ -1,11 +1,8 @@
 #' Title draw volcano plot
 #'
 #' @param input the metabolites file//example:data/metabolitesg.csv
-#' @param CK the Control group rows
-#' @param TR the treatment group rows
-#' @param legendp the position of legend
-#' @param xlab the range of abscissa
-#' @param ylab the range of ordinate
+#' @param titlename Title name
+#' @param G compared groups
 #'
 #' @return the volcano plot
 #' @import ggplot2
@@ -64,11 +61,11 @@ volcanoplot<-function(input, titlename="volcano plot",G=c("CK","L")){
     theme_bw()+
     scale_size_continuous(range = c(0.2,8))+#更改点的大小
     ggtitle(label = titlename)+
-    theme(plot.title = element_text(size = 16,hjust = 0.5, family = "mono"),
-          legend.title = element_text(size = 10,family = "mono"),
-          legend.text = element_text(size = 10,family = "mono"),
-          axis.title =  element_text(size = 12,family = "mono"),
-          axis.text =  element_text(size = 10,family = "mono"),
+    theme(plot.title = element_text(size = 16,hjust = 0.5, family = "serif"),
+          legend.title = element_text(size = 10,family = "serif"),
+          legend.text = element_text(size = 10,family = "serif"),
+          axis.title =  element_text(size = 12,family = "serif"),
+          axis.text =  element_text(size = 10,family = "serif"),
           panel.grid=element_blank(),
           #标签位置
           legend.position = "right",

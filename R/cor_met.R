@@ -1,4 +1,4 @@
-#' Title Get the correlation picture
+#' Title Get the correlation picture of metabolites
 #'
 #' @param input the anaylzing filename
 #' @import ggplot2

@@ -3,7 +3,6 @@
 #' @param metabolites the metabolites table
 #' @param microbiome the microbiome table
 #' @import ggplot2
-#' @import ggDoubleHeat
 #' @return a picture of the metabolites and microbiome correlation map
 #' @export
 #' @examples
@@ -42,30 +41,34 @@ cor_metmicro<-function(metabolites,microbiome){
     }
   }
   cormat<-cormat[-1,]
-  textsize<-1.5
-  titlesize<-9
-  xtisize<-7
-  ytisize<-7
-  xtesize<-7
-  ytesize<-7
-  legtesize<-5.5
-  legtisize<-5.5
+
+  color<-c("#00E6E6","white","#FF869D")
+  allsize<-9
+  textsize<-2
+  titlesize<-22
+  xtisize<-19
+  ytisize<-19
+  xtesize<-16
+  ytesize<-16
+  legtesize<-10
+  legtisize<-14
   p<-ggplot(data=cormat,aes(x=Microbiome,y=Metabolite))+
-    geom_heat_grid(outside = `r-value`,
-                   outside_colors = c("#00E6E6","white","#FF7A00"),
-                   inside =  `p-value`,
-                   inside_colors = c("#6E00E6","white"),
-                   r=3*sqrt(2))+
+    geom_tile(width=1,height =1,color = "lightgrey", fill="white")+
+    geom_point(aes(size = abs(`r-value`), color = `r-value`))+
+    coord_equal() + # 绘制正方形，长宽相等
+    scale_color_gradientn(colors = color)+#legend上下限
+    guides(size = "none",  #隐藏size图例
+           color = guide_colorbar(title = "Pearson's r"))+#修改图例标签
     ggtitle("Metabolites & Microbiome Correlation")+
     geom_text(aes(label = Sig),
-              color = "#FFFF00",
+              color = "#FFFFB3",
               size = textsize,
               family = "mono",
               fontface="bold")+
     xlim(colnames(micro))+
     ylim(colnames(meta))+
     theme(
-      text = element_text(family = "mono", size=16),
+      text = element_text(family = "serif", size=16),
       plot.title = element_text(size = titlesize,hjust = 0.5,family = "serif"),#title 大小
       axis.title.x = element_text(face = "bold", angle = 0, size = xtisize),
       axis.title.y = element_text(face = "bold", angle = 90, size = ytisize),
@@ -73,6 +76,7 @@ cor_metmicro<-function(metabolites,microbiome){
       axis.text.y = element_text(face = "bold", angle = 25, hjust = 1,size = ytesize),
       legend.text = element_text(size = legtesize),#legend字体大小
       legend.title = element_text(size = legtisize), #设置legend标签字体大小
+      plot.margin = unit(c(1, 1, 1, 1), "cm"),#下、左、上、右
       legend.position = "right"
     )
   return(p)

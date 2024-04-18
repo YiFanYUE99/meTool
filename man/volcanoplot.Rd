@@ -9,15 +9,9 @@ volcanoplot(input, titlename = "volcano plot", G = c("CK", "L"))
 \arguments{
 \item{input}{the metabolites file//example:data/metabolitesg.csv}
 
-\item{CK}{the Control group rows}
+\item{titlename}{Title name}
 
-\item{TR}{the treatment group rows}
-
-\item{legendp}{the position of legend}
-
-\item{xlab}{the range of abscissa}
-
-\item{ylab}{the range of ordinate}
+\item{G}{compared groups}
 }
 \value{
 the volcano plot

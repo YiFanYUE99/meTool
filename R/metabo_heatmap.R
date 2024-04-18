@@ -2,7 +2,6 @@
 #'
 #' @param input csv file//example: data/metabolitesg.csv
 #' @param comgr compared group names(just 2)
-#' @param table table from function metadiff
 #'
 #' @return the metabolites abundance heatmap
 #' @export
@@ -11,12 +10,12 @@
 #' @examples
 #' #input<- "data/metabolitesg.csv"
 #' #comgr=c("CK","L")
-#' #table<-metadiff(input,comgr2)#筛选
-#' #p<-metabo_heatmap(input,comgr,table)
+#' #p<-metabo_heatmap(input,comgr)
 #' #ggsave(plot = p,"pic/metabolites_CK_L.png",width = 20,height = 15,dpi = 300,units = "cm")
 
 
-metabo_heatmap<-function(input,comgr,table){
+metabo_heatmap<-function(input,comgr){
+  table<-metadiff(input,comgr)
   data<-read.table(input,header=T,row.names=1,check.names = F,sep=",")
   data1<-data[data$Group==comgr[1]|data$Group==comgr[2],1:dim(data)[2]]
   data2<-data1[,1:(dim(data)[2]-1)]
