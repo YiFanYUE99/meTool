@@ -4,7 +4,7 @@
 \alias{mantelheatmap}
 \title{Title A function to make heatmap with mantel test}
 \usage{
-mantelheatmap(metabolites, micro, num)
+mantelheatmap(metabolites, microbiome)
 }
 \arguments{
 \item{metabolites}{A csv file contains sample names in the first column, Groups in the last column, and metabolites abundance in the middle.}
@@ -20,11 +20,10 @@ A picture
 Title A function to make heatmap with mantel test
 }
 \examples{
-#micro<-microdiff("data/microbiome.csv")
-#metabolites<-"data/metabolite.csv"
-#num<-c(4,8,12,22)
+#micro<-"data/microbiome.csv"
+#metabolites<-"data/metabolitesg.csv"
 #output<-"pic/micro_meta.png"
-#p<-mantelheatmap(metabolites, micro, num)
+#p<-mantelheatmap(metabolites, micro)
 #ggsave(output, p, width = 11, height = 6, dpi = 300)
 
 }

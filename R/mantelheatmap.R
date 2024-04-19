@@ -4,30 +4,56 @@
 #' @param micro Run micro<-microdiff("data/microbiome.csv") to find different microbiome.
 #' @param num From which columns represent "Class", "Order", "Family", and "Genus"
 #' @import devtools
+#' @import linkET
 #' @return A picture
 #' @export
 #' @examples
-#' #micro<-microdiff("data/microbiome.csv")
-#' #metabolites<-"data/metabolite.csv"
-#' #num<-c(4,8,12,22)
+#' #micro<-"data/microbiome.csv"
+#' #metabolites<-"data/metabolitesg.csv"
 #' #output<-"pic/micro_meta.png"
-#' #p<-mantelheatmap(metabolites, micro, num)
+#' #p<-mantelheatmap(metabolites, micro)
 #' #ggsave(output, p, width = 11, height = 6, dpi = 300)
 #'
 
 
-mantelheatmap<-function(metabolites,micro,num){
+mantelheatmap<-function(metabolites,microbiome){
   metabo<-read.csv(metabolites, check.names = FALSE, header = 1,row.names = 1)
   metabo1<-metabo[,1:(dim(metabo)[2]-1)]
   Group<-metabo$Group
+  micro<-read.csv(microbiome, check.names = FALSE, header = 1,row.names = 1)
   micro1<-micro[,1:(dim(micro)[2]-1)]
+  miname<-as.data.frame(matrix(ncol=1,nrow=1))
+  for (k in 1:dim(micro1)[2]) {
+    # 找到最后一个逗号的位置
+    microname <- max(gregexpr(";", colnames(micro1)[k])[[1]])
+    # 提取最后一个逗号后的字符
+    extracted <- substr(colnames(micro)[k],
+                        start = microname + 1,
+                        stop = nchar(colnames(micro1)[k]))
+    miname<-rbind(miname,extracted)
+  }
+  miname<-miname[-1,]
+  colnames(micro1)<-miname
+  micro1<-as.data.frame(scale(micro1,center = T,scale = T))#中心化且归一化数据
+
+  P=length(grep("^p", colnames(micro1)))
+  C=length(grep("^c", colnames(micro1)))
+  O=length(grep("^o", colnames(micro1)))
+  f=length(grep("^f", colnames(micro1)))
+  G=length(grep("^g", colnames(micro1)))
+  Phylum = 1:P
+  Class = (max(Phylum)+1):(max(Phylum)+C)
+  Order = (max(Class)+1):(max(Class)+O)
+  Family = (max(Order)+1):(max(Order)+f)
+  Genus = (max(Family)+1):(max(Family)+G)
+
   mantel <- mantel_test(micro1, metabo1,
                         mantel_fun = 'mantel',
-                        spec_select = list(Phylum = 1:(num[1]-1),
-                                           Class = num[1]:(num[2]-1),
-                                           Order = num[2]:(num[3]-1),
-                                           Family = num[3]:(num[4]-1),
-                                           Genus = num[4]:dim(micro1)[2])) %>%
+                        spec_select = list(Phylum = Phylum,
+                                           Class = Class,
+                                           Order = Order,
+                                           Family = Family,
+                                           Genus = Genus)) %>%
     mutate(r1 = cut(r, breaks = c(-Inf, 0.2, 0.4, Inf),
                     labels = c("< 0.2", "0.2 - 0.4", ">= 0.4")),
            p1 = cut(p, breaks = c(-Inf, 0.01, 0.05, Inf),
@@ -62,8 +88,8 @@ mantelheatmap<-function(metabolites,micro,num){
     geom_couple(data = mantel,
                 aes(colour = p1, size = r1),
                 curvature = nice_curvature())+
-    scale_size_manual(values = c(0.25, 0.5, 0.75)) + #连线粗细
-    scale_colour_manual(values = c("#CFF5D2","#D8CCE6","#F2D2D2")) + #连线配色
+    scale_size_manual(values = c(0.5, 1.5, 1.75)) + #连线粗细
+    scale_colour_manual(values = c("#00FF00","#2CFFFF","#E0E0E0")) + #连线配色
     #修改图例：
     guides(size = guide_legend(title = "Mantel r",
                                override.aes = list(colour = "grey35"),
@@ -72,9 +98,16 @@ mantelheatmap<-function(metabolites,micro,num){
                                  override.aes = list(size = 3),
                                  order = 1),
            fill = guide_colorbar(title = "Pearson r", order = 3))+
-    theme(panel.grid=element_blank(),
+    ggtitle("Mantel test of Microbiome and Metabolites")+
+    theme(plot.title = element_text(size=16,family = "serif",face = "bold",hjust = 0.5),
+          axis.title.y = element_blank(),
+          axis.title.x = element_blank(),
+          axis.text.x = element_text(size = 10,  family = "mono"),
+          axis.text.y = element_text(size = 10,  family = "mono"),
+          panel.background = element_rect(colour = "#FFF5CC",fill = NA),
+          panel.grid=element_blank(),
           #标签位置
-          legend.position = c(0,0.7),
+          legend.position = "left"
           #legend.justification = c(0,0.3)#相对位置
     )
   p3
