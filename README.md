@@ -54,6 +54,11 @@ metmicro2dplot()
 pathway()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/pathway_CK_H.png)
 
+input files
+![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/input.png)
+
+
+
 
 
 
