@@ -13,7 +13,7 @@ pcaplot()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/pcaplot.png)
 
 plsdaplot()
-![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/plsda_combined.png)
+![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/plsdaplot_combined.png)
 
 volcanoplot()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/volcano_combined.png)
