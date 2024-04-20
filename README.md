@@ -13,13 +13,10 @@ pcaplot()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/pcaplot.png)
 
 plsdaplot()
-![image](https://github.com/YiFanYUE99/meTool/tree/main/pic/plsda_combined.png)
+![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/plsda_combined.png)
 
 volcanoplot()
-![image](https://github.com/YiFanYUE99/meTool/tree/main/pic/volcano_combined.png)
-
-pathway()
-![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/pathway_CK_H.png)
+![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/volcano_combined.png)
 
 met_pics()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/metabolites_Abundance.png).
@@ -53,6 +50,9 @@ mantelheatmap()
 
 metmicro2dplot()
 ![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/plot2d.png)
+
+pathway()
+![image](https://github.com/YiFanYUE99/meTool/blob/main/pic/pathway_CK_H.png)
 
 
 
