@@ -5,10 +5,13 @@ To download meTool package
 options(download.file.method = "wininet") #Not necessary; only if the package cannot be download successfully.
 
 #First download Dependency package
+
 devtools::install_github("Hy4m/linkET", force = TRUE)
 
 if (!require("BiocManager", quietly = TRUE))
+
   install.packages("BiocManager")
+  
 BiocManager::install("ComplexHeatmap")
 
 devtools::install_github("YiFanYUE99/meTool")
